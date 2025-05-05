@@ -1,14 +1,11 @@
 package com.springwithwaqas.store.services;
 
 import com.springwithwaqas.store.entities.Address;
-import com.springwithwaqas.store.entities.Category;
-import com.springwithwaqas.store.entities.Product;
 import com.springwithwaqas.store.entities.User;
 import com.springwithwaqas.store.repositories.*;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -82,5 +79,31 @@ public class UserService {
     @Transactional
     public void productWithCategory() {
         productRepository.deleteById(1L);
+    }
+
+    @Transactional
+    public void updateProductPrices() {
+        productRepository.updatePriceByCategory(BigDecimal.valueOf(10),(byte)1);
+    }
+
+    @Transactional
+    public void fetchProducts() {
+     var products = productRepository.findProducts(BigDecimal.valueOf(1), BigDecimal.valueOf(15));
+       products.forEach(System.out::println);
+    }
+
+    @Transactional
+    public void fetchUsers() {
+        var user = userRepository.findAllWithAddresses();
+        user.forEach(u -> {
+            System.out.println(u);
+            u.getAddresses().forEach(System.out::println);
+        });
+    }
+
+    @Transactional
+    public void fetchLoyaltyPoints() {
+       var users = userRepository.findLoyalUsers(2);
+        users.forEach(p -> System.out.println(p.getId() + ": " + p.getEmail()));
     }
 }

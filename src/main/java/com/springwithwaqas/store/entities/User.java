@@ -14,7 +14,6 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @Entity
-@ToString
 @Table(name = "users")
 public class User {
     @Id
@@ -72,5 +71,13 @@ public class User {
 
     public void addFavouriteProduct(Product product) {
         wishList.add(product);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "id = " + id + ", " +
+                "name = " + name + ", " +
+                "email = " + email + ")";
     }
 }
