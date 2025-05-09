@@ -6,6 +6,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+import java.math.BigDecimal;
+
 @SpringBootApplication
 public class StoreApplication {
 
@@ -13,7 +15,7 @@ public class StoreApplication {
        ApplicationContext context = SpringApplication.run(StoreApplication.class, args);
 
       var service = context.getBean(UserService.class);
-         service.fetchLoyaltyPoints();
+         service.fetchPaginatedProducts(0,1);
     }
 
 }
